@@ -70,11 +70,65 @@ Si suppone ragionando per assurdo che OPT(x) non sia la soluzione ottima, mentre
 Sappiamo dalla nostra relazione di ricorrenza che vale che:<br>
 $$OPT(x) <= OPT(x - t) + 1$$
 Si può quindi affermare che:
-$$O \l OPT(x) \le$$
-
+$$O < OPT(x) \le OPT(x - t) + 1$$
+Questo implica che si può scrivere:
+$$O - 1 < OPT(x - t)$$
+Questo significa che abbiamo trovato una soluzione migliore al sottoproblema per capacità x - t. Questo contraddice l'ipotesi. C.V.D.<br>
+Per l'ultimo caso, si può ripetere un ragionamento speculare.
 
 ## Esercizio 3 
 
-```
+Descrivere un algoritmo che, dato un grafo non orientato connesso G = (V, E) e un vertice u in V,
+determini un orientamento degli archi di G in modo che nel grafo orientato risultante ogni vertice di V
+sia raggiungibile da u.
+Più precisamente, l’algoritmo, preso un grafo non orientato G = (V, E) e un vertice u in V, deve
+restituire un grafo orientato G→ = (V, E→), con |E| =| E →|; in cui ogni arco (u, v) di E è sostituito con
+l’arco diretto (u, v) oppure con l’arco diretto (v, u), in modo che G→ soddisfi la richiesta.
+La descrizione può essere effettuata tramite pseudo-codice oppure verbalmente, ma in maniera precisa. Giustificare la correttezza dell’algoritmo descritto.
 
 ```
+build(G = (V, E), v)
+{
+    E2 = {}
+    explored[|V|] = {False}
+    explored_edges[|E|] = {False}
+
+    queue = {v}
+    explored[v] = True
+
+    while ! queue.empty()
+    {
+        for e=(u, w) in E[u]
+        {
+            if ! explored[w]
+            {
+                queue.insert(w)
+                explored[w] = True
+            }
+
+            if ! explored_edges[(u, w)] and ! explored_edges[(w, u)]
+            {
+                explored_edges[(u, w)] = True
+                E2[u].push((u, w)) // arco direzionato da u a w
+            }
+        }
+    }
+
+    return (u, E2)
+}
+
+```
+
+La complessità temporale di questo algoritmo, è ovviamente data dalla complessità dell'esplorazione, quindi l'algoritmo è O(|V| + |E|). Per quanto riguarda la complessità spaziale, in questo caso, sarà O(|V| + |E|).
+
+Il seguente algoritmo è corretto perchè, è noto che la BFS visita il grafo costruendo una sorta di albero radicato nel primo nodo esplorato, che nel nostro caso è v. Dall'algoritmo, è visibile che costruiamo sempre un arco dal nodo padre al nodo figlio all'interno dell'albero. Questo ci porta a concludere che nel grafo orientato costruito G', sarà presente un sottografo che è un albero radicato in v, dove sono presenti tutti quanti i nodi. Dato che è presente questo sottografo, siamo sicuri che ogni nodo che era raggiungibile a partire da v nel grafo originale lo sarà anche qui.
+
+## Esercizio 4
+
+
+
+## Esercizio 5
+
+Dato un grafo G=(V,E), si individui un algoritmo che è in grado in tempo O(|V| + |E|) di verificare se è presente o meno un ciclo all'interno del grafo.
+
+Dato un grafo G=(V, E), si individui un algoritmo che è in grado in tempo O(|V|) di verificare se è presente un ciclo all'interno del grafo.
