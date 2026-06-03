@@ -141,7 +141,7 @@ Si descriva ed analizzi un algoritmo per la seguente variazione del problema del
 
 Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
 
-$$\text{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\ \text{Opt}(x, i - 1) & \text{se } x < w_i \\ \max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$
+$$\text{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\\\ \text{Opt}(x, i - 1) & \text{se } x < w_i \\\\ \max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$
 
 Dimostriamo che la seguente relazione di ricorrenza è coretta.
 
