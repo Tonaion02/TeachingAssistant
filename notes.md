@@ -1,4 +1,4 @@
-# 3 june
+<!-- # 3 june Old
 
 ## Esercizio 1
 
@@ -131,4 +131,38 @@ Il seguente algoritmo è corretto perchè, è noto che la BFS visita il grafo co
 
 Dato un grafo G=(V,E), si individui un algoritmo che è in grado in tempo O(|V| + |E|) di verificare se è presente o meno un ciclo all'interno del grafo.
 
-Dato un grafo G=(V, E), si individui un algoritmo che è in grado in tempo O(|V|) di verificare se è presente un ciclo all'interno del grafo.
+Dato un grafo G=(V, E), si individui un algoritmo che è in grado in tempo O(|V|) di verificare se è presente un ciclo all'interno del grafo. -->
+
+# 3 June
+
+## Esercizio (Problema dello zaino con elementi adiacenti)
+
+Si descriva ed analizzi un algoritmo per la seguente variazione del problema dello zaino: Dati n oggetti di peso $w_1,...,w_n$ e con rispettivi valori $v_1,...,v_n$ e una capacità massima $W$. Si vuole individuare un sottoinsieme $S = \{j|1 \le j \le n\}$ tale che $\sum_{w \in S}w \le W$ di valore totale massimo e dove l'insieme di oggetti è tale che se è presente l'elemento di indice i non è presente l'elemento di indice i+1.
+
+Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
+$$Opt(x, i) = \begin{cases}
+0 & i == 0 \\
+Opt(x, i - 1) & x < w_i \\
+Max\{Opt(x, i-1), Opt(x - w_i, i - 2) + v_i\} & altrimenti
+\end{cases}$$
+<br>
+Dimostriamo che la seguente relazione di ricorrenza è coretta.
+
+Nel caso del passo base, è banale che stiamo individuando la soluzione ottima. Non è possibile scegliere una soluzione di valore > 0 se non abbiamo elementi rimasti.<br>
+Il primo passo ricorsivo, è anch'esso banalmente ottimo. Se la nostra capacità è x e l'elemento i-esimo ha un peso che eccede questa capacità, non possiamo che cercare semplicemente di realizzare uno zaino con gli elementi rimasti.<br>
+Rimane quindi da dimostrare la corretteza dell'ultimo passo. Ragionando per assurdo, ipotizziamo di avere una certa i > 0 e una $x \ge w_i$ e che $Opt(x, i)$ non è la soluzione ottima. Si suppone quindi che la soluzione ottima per questo sottoproblema sia $O$.<br>
+La soluzione ottima, o contiene l'elemento i-esimo oppure non lo contiene.<br>
+Supponiamo che lo contenga.<br>
+Vale quindi la seguente relazione: $O > Opt(x, i) \ge max\{Opt(x - w_i, i - 2) + v_i, Opt(x, i - 1)\}$. Inoltre, dato che $O$ è la soluzione ottima e contiene l'elemento i-esimo, si può immaginare di rimuovere da $O$ l'elemento i-esimo. In questo modo otteniamo una soluzione ammissibile per il sottoproblema con capacità residua $x - w_i$ e dove vengono solamente utilizzati $i - 2$. Questa soluzione avrà un valore $O - v_i$.<br>
+Tramite le relazioni precedenti è possibile ricavare che $O > Opt(x - w_i, i - 2) + v_i$ dal quale è possibile determinare che $O - v_i > Opt(x - w_i, i - 2), ma questo significherebbe che si è trovato una soluzione ammissibile al sottoproblema di capacità residua $x - w_i$ con i-2 elementi rimasti, che è assurdo.<br>
+Ci rimane quindi l'altra opzione, quella in cui in $O$ non è presente l'elemento i-esimo. In questo caso, $O$ è una soluzione ammissibile per il sottoproblema con capacità residua $x - w_i$ e con i-1 elementi restanti. Ma sappiamo anche dalla relazioni precedenti che è possibile scrivere $O > Opt(x, i - 1)$. Ma questo è assurdo, perchè avremmo trovato una soluzione ammissibile per quel sottoproblema con un valore migliore di quello dell'ottimo.<br>
+C.V.D.
+
+Data la seguente relazione di ricorrenza, scrivere una soluzione al problema diventa abbastanza banale. Ci basta infatti implementare un algoritmo che va a riempire una matrice che viene utilizzata per mantenere in memoria le soluzioni a tutti quanti i sottoproblemi.
+
+La complessità spaziale e temporale è $O(nW)$. Quindi sia la memoria necessaria per la matrice, che il tempo necessario a risolvere il problema.
+
+# 5 June
+
+## Esercizio 1 (Ponti)
+
