@@ -140,14 +140,9 @@ Dato un grafo G=(V, E), si individui un algoritmo che è in grado in tempo O(|V|
 Si descriva ed analizzi un algoritmo per la seguente variazione del problema dello zaino: Dati n oggetti di peso $w_1,...,w_n$ e con rispettivi valori $v_1,...,v_n$ e una capacità massima $W$. Si vuole individuare un sottoinsieme $S = \{j|1 \le j \le n\}$ tale che $\sum_{w \in S}w \le W$ di valore totale massimo e dove l'insieme di oggetti è tale che se è presente l'elemento di indice i non è presente l'elemento di indice i+1.
 
 Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
-$$
-\operatorname{Opt}(x, i) = \begin{cases}
-0 & \text{se } i = 0 \\
-\operatorname{Opt}(x, i - 1) & \text{se } x < w_i \\
-\max\{\operatorname{Opt}(x, i-1), \operatorname{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti}
-\end{cases}
-$$
-<br>
+
+$$\operatorname{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\ \operatorname{Opt}(x, i - 1) & \text{se } x < w_i \\ \max\{\operatorname{Opt}(x, i-1), \operatorname{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$
+
 Dimostriamo che la seguente relazione di ricorrenza è coretta.
 
 Nel caso del passo base, è banale che stiamo individuando la soluzione ottima. Non è possibile scegliere una soluzione di valore > 0 se non abbiamo elementi rimasti.<br>
