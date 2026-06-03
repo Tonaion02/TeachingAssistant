@@ -145,8 +145,6 @@ Si descriva ed analizzi un algoritmo per la seguente variazione del problema del
 
 Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
 
-<!-- $$\text{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\\\ \text{Opt}(x, i - 1) & \text{se } x < w_i \\\\ \max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$ -->
-
 ```math
 \text{Opt}(x, i) = \begin{cases} 
 0 & \text{se } i = 0 \\ 
@@ -163,7 +161,7 @@ Rimane quindi da dimostrare la corretteza dell'ultimo passo. Ragionando per assu
 La soluzione ottima, o contiene l'elemento i-esimo oppure non lo contiene.<br>
 Supponiamo che lo contenga.<br>
 Vale quindi la seguente relazione: $O > Opt(x, i) \ge max\{Opt(x - w_i, i - 2) + v_i, Opt(x, i - 1)\}$. Inoltre, dato che $O$ è la soluzione ottima e contiene l'elemento i-esimo, si può immaginare di rimuovere da $O$ l'elemento i-esimo. In questo modo otteniamo una soluzione ammissibile per il sottoproblema con capacità residua $x - w_i$ e dove vengono solamente utilizzati $i - 2$. Questa soluzione avrà un valore $O - v_i$.<br>
-Tramite le relazioni precedenti è possibile ricavare che $O > Opt(x - w_i, i - 2) + v_i$ dal quale è possibile determinare che $O - v_i > Opt(x - w_i, i - 2), ma questo significherebbe che si è trovato una soluzione ammissibile al sottoproblema di capacità residua $x - w_i$ con i-2 elementi rimasti, che è assurdo.<br>
+Tramite le relazioni precedenti è possibile ricavare che $O > Opt(x - w_i, i - 2) + v_i$ dal quale è possibile determinare che $O - v_i > Opt(x - w_i, i - 2)$, ma questo significherebbe che si è trovato una soluzione ammissibile al sottoproblema di capacità residua $x - w_i$ con i-2 elementi rimasti, che è assurdo.<br>
 Ci rimane quindi l'altra opzione, quella in cui in $O$ non è presente l'elemento i-esimo. In questo caso, $O$ è una soluzione ammissibile per il sottoproblema con capacità residua $x - w_i$ e con i-1 elementi restanti. Ma sappiamo anche dalla relazioni precedenti che è possibile scrivere $O > Opt(x, i - 1)$. Ma questo è assurdo, perchè avremmo trovato una soluzione ammissibile per quel sottoproblema con un valore migliore di quello dell'ottimo.<br>
 C.V.D.
 
@@ -176,6 +174,31 @@ La complessità spaziale e temporale è $O(nW)$. Quindi sia la memoria necessari
 ## Esercizio 1 (Ponti)
 
 ## Esercizio 2 (Perturbazione MST)
+
+Dato un grafo G e la funzione $c$ che assegna un peso a un arco di G. $T$ è un MST per G. Si consideri una funzione $c'$ che rappresenta una perturbazione di G, dove $c'(e) = c(e) + 2$ con e arco di G. Si dimostri che $T$ è un MST anche nel grafo con i costi perturbati.
+
+Ragionando per assurdo si supponga che $T$ non è l'MST nel grafo perturbato G. Questo significa che esiste $T'$ che è un MST per G perturbato. Quindi si può concludere che $c'(T') < c'(T)$. Si può però scrivere:
+
+```math
+c'(T') = \sum_{e \in T'} (c(e) + 2) = \sum_{e \in T'} c(e) + 2*|E| \\
+c'(T) = \sum_{e \in T} (c(e) + 2) = \sum_{e \in T} c(e) + 2*|E| \\
+```
+
+Ma quindi si può determinare che:
+```math
+\sum_{e \in T'} c(e) + 2|E| < \sum_{e \in T} c(e) + 2|E|
+```
+Possiamo rimuovere la quantità 2|E| da entrambi i membri mantendendo invariata la disequazione.<br>
+In questo modo, si arriva a:
+```math
+\sum_{e \in T'} c(e) < \sum_{e \in T} c(e)
+```
+Che può essere riscritto come:
+```math
+c(T') < c'(T)
+```
+T' è sicuramente un albero ricoprente a prescindere dal costo assegnato agli archi, ma inoltre, avrebbe un costo minore del MST T per G. Questo è assurdo, dato che abbiamo negato l'ipotesi.<br>
+C.V.D.
 
 ## Esercizio 3 (Trovare un ciclo all'interno del grafo)
 
