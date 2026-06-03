@@ -141,10 +141,10 @@ Si descriva ed analizzi un algoritmo per la seguente variazione del problema del
 
 Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
 $$
-Opt(x, i) = \begin{cases}
-0 & i == 0 \\
-Opt(x, i - 1) & x < w_i \\
-Max\{Opt(x, i-1), Opt(x - w_i, i - 2) + v_i\} & altrimenti
+\operatorname{Opt}(x, i) = \begin{cases}
+0 & \text{se } i = 0 \\
+\operatorname{Opt}(x, i - 1) & \text{se } x < w_i \\
+\max\{\operatorname{Opt}(x, i-1), \operatorname{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti}
 \end{cases}
 $$
 <br>
