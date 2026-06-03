@@ -133,6 +133,10 @@ Dato un grafo G=(V,E), si individui un algoritmo che è in grado in tempo O(|V| 
 
 Dato un grafo G=(V, E), si individui un algoritmo che è in grado in tempo O(|V|) di verificare se è presente un ciclo all'interno del grafo. -->
 
+# Soluzioni di alcuni esercizi
+
+*I seguenti appunti sono da intendere come delle note personali. Non è consigliato quindi copiarli prendendoli per buoni e il sottoscritto non si assume nessuna responsabilità riguardo la correttezza di quanto scritto.*
+
 # 3 June
 
 ## Esercizio (Problema dello zaino con elementi adiacenti)
@@ -141,7 +145,15 @@ Si descriva ed analizzi un algoritmo per la seguente variazione del problema del
 
 Il seguente problema può essere risolto attraverso la seguente relazione di ricorrenza.
 
-$$\text{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\\\ \text{Opt}(x, i - 1) & \text{se } x < w_i \\\\ \max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$
+<!-- $$\text{Opt}(x, i) = \begin{cases} 0 & \text{se } i = 0 \\\\ \text{Opt}(x, i - 1) & \text{se } x < w_i \\\\ \max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} \end{cases}$$ -->
+
+```math
+\text{Opt}(x, i) = \begin{cases} 
+0 & \text{se } i = 0 \\ 
+\text{Opt}(x, i - 1) & \text{se } x < w_i \\ 
+\max\{\text{Opt}(x, i-1), \text{Opt}(x - w_i, i - 2) + v_i\} & \text{altrimenti} 
+\end{cases}
+```
 
 Dimostriamo che la seguente relazione di ricorrenza è coretta.
 
@@ -163,4 +175,7 @@ La complessità spaziale e temporale è $O(nW)$. Quindi sia la memoria necessari
 
 ## Esercizio 1 (Ponti)
 
-## Esercizio 2 (Perturbaione MST)
+## Esercizio 2 (Perturbazione MST)
+
+## Esercizio 3 (Trovare un ciclo all'interno del grafo)
+
